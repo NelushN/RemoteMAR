@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "680599335071",
+    "project_id": "serverar-67ede",
+    "storage_bucket": "serverar-67ede.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680599335071:android:19458191cf6242064cb2aa",
+        "android_client_info": {
+          "package_name": "com.sselinco.cancar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ5Lh7Z-Vsxvn9dS0FcbM2wRa5WuRd_bI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

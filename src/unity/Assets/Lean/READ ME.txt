@@ -1,0 +1,9 @@
+Welcome to Lean!
+
+The documentation for Lean Touch can be found here: 
+
+https://github.com/Parsa-Rajabi/Lean-Touch-README
+
+Keep in mind the documentation is in HTML format, so you will need to open it in a web browser.
+
+Enjoy!
