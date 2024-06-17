@@ -1,0 +1,149 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
+public class ColorController : MonoBehaviourPunCallbacks, IPunObservable
+{
+    public Color color = Color.white;
+    public MeshRenderer meshRenderer;
+    private Color defaultColor;
+    private bool colorEnabled = false;
+    public GameObject currentHitObj;
+    public GameObject colorCube;
+    public Color oldColor;
+
+    private PhotonView parentPhotonView;
+
+    private void Awake()
+    {
+        ///parentPhotonView = transform.GetComponent<PhotonView>();
+        parentPhotonView = PhotonView.Find(7);
+    }
+
+    public void OnPhotonInstantiate(Photon.Pun.PhotonMessageInfo info)
+    {
+        Debug.Log("Is this mine?... " + info.Sender.IsLocal.ToString());
+    }
+
+    void Update()
+    {
+        parentPhotonView = PhotonView.Find(7);
+        if (parentPhotonView != null && parentPhotonView.IsMine)
+        {
+            color = meshRenderer.material.color;
+            if (colorEnabled == false && Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(ray);
+                BoxCollider mc = GetComponent<BoxCollider>();
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                //colorCube = PhotonNetwork.Instantiate(hits[0].transform.gameObject.name, mousePosition, Quaternion.FromToRotation(Vector3.up, Vector3.up));
+                //Debug.Log("---23  " + colorCube);
+                Debug.Log("---27--------parentPhotonView  " + parentPhotonView);
+               // for (int i = 0; i < hits.Length; i++)
+                //{
+                    Debug.Log("---23--------  " + hits[0].transform.gameObject.name);
+                   // meshRenderer = hits[0].transform.gameObject.GetComponent<MeshRenderer>();
+                    if (hits[0].transform.gameObject.name != "model8")
+                    {
+                        Debug.Log("---25  ");
+                        if (hits[0].transform.gameObject.layer == hits[0].collider.gameObject.layer)
+                        {
+                            Debug.Log("---24  ");
+                            meshRenderer = hits[0].transform.gameObject.GetComponent<MeshRenderer>();
+                            defaultColor = oldColor;
+                            color = meshRenderer.material.color;
+                            color = Color.white;
+                            //meshRenderer.materials[0].color = Color.white;
+                            //meshRenderer.materials[1].color = Color.white;
+                            // = PhotonNetwork.Instantiate(hits[0].transform.gameObject.name, mousePosition, Quaternion.FromToRotation(Vector3.up, Vector3.up));
+                            //Debug.Log("---23  "+ colorCube);
+                            oldColor = defaultColor;
+                            colorEnabled = true;
+                        Debug.Log("---26--------parentPhotonView  " + meshRenderer);
+                        Debug.Log("---23  ");
+                        parentPhotonView.RPC("SetColor", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer, (byte)(color.r * 255), (byte)(color.g * 255), (byte)(color.b * 255));
+                        meshRenderer = null;
+
+                      //  }
+                    }
+                }
+            }
+            else if (color == Color.white && Input.GetMouseButtonDown(0) && colorEnabled == true)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(ray);
+
+                BoxCollider mc = GetComponent<BoxCollider>();
+                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                if (hits[0].transform.gameObject.layer == hits[0].collider.gameObject.layer)
+                {
+                    Debug.Log("---2  ");
+
+                    meshRenderer = hits[0].transform.gameObject.GetComponent<MeshRenderer>();
+                    meshRenderer.material.color = oldColor;
+                    colorEnabled = false;
+
+                    parentPhotonView.RPC("SetColor", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer, (byte)(color.r * 255), (byte)(color.g * 255), (byte)(color.b * 255));
+                }
+            }
+            //else
+            //{
+            //    colorEnabled = false;
+            //}
+        }
+    }
+
+    [PunRPC]
+    private void SetColor(Player player, byte r, byte g, byte b)
+    {
+        Debug.Log("---1  ");
+        if (player == PhotonNetwork.LocalPlayer)
+        //{
+            Debug.Log("---##########333  ");
+        //    color = new Color32(255, 255, 255, 255);
+        //}
+        //else
+        {
+            Debug.Log("---28--------parentPhotonView  " + meshRenderer);
+            int childCount = parentPhotonView.transform.childCount;
+            Debug.Log("Number of child game objects: " + childCount);
+
+            //for (int i = 0; i <= childCount; i++)
+            //{
+                //GameObject child = parentPhotonView.transform.GetChild(i).gameObject;
+               // Debug.Log("Child object found: " + child.name);
+                MeshRenderer childRenderer = meshRenderer;// coloredCube.GetComponent<MeshRenderer>();
+                if (childRenderer != null)
+                {
+                    Debug.Log("##################### childRenderer" + childRenderer);
+                    childRenderer.material.color = new Color32(255, 255, 255, 255);
+
+              //  }
+            }
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            Debug.Log("#####################write " + meshRenderer);
+            stream.SendNext(255);
+            stream.SendNext(255);
+            stream.SendNext(255);
+        }
+        else
+        {
+            Debug.Log("#####################read " + meshRenderer);
+            color.r = (float)stream.ReceiveNext();
+            color.g = (float)stream.ReceiveNext();
+            color.b = (float)stream.ReceiveNext();
+        }
+    }
+}

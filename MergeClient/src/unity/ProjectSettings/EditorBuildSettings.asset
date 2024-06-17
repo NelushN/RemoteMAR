@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/AllSyncNonStream.unity
+    guid: a03be83167172134e9c49795d0e8bb36
+  - enabled: 1
+    path: Assets/Scenes/NonStream.unity
+    guid: ce7264f8ecbb4df49a3512e361e6957e
+  - enabled: 1
+    path: Assets/Scenes/NonStreamNonSync.unity
+    guid: 9c773ab2322a4474d877586e8b1d01d6
+  - enabled: 1
+    path: Assets/Scenes/StreamSync.unity
+    guid: e452c21f37c7fff4a8bbefeec84a7b4d
+  - enabled: 1
+    path: Assets/Scenes/StreamNonSync.unity
+    guid: f5367293217effe44a4141ffdb39c1e6
+  m_configObjects: {}
