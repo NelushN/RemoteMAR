@@ -1,35 +1,3 @@
-# CancerAR 
-
-An augmented reality mobile application with real time collaboration between 2 people on a 3D model (at present, lungs and kidneys are usable)
-
-![Unity Install](README%20Pictures/AppScreenshot.png)
-
-## Video Demos
-
-### Summer 2021
-- [3D Manipulation / Controls](https://youtu.be/1dBkyXCBECE)
-- [Multiplayer Feature](https://youtu.be/DuOQn5LT-lE)
-- [Built-in Annotation](https://youtu.be/QMWRvGZOz6U)
-
-### Spring 2022
-- [Network Test](https://drive.google.com/file/d/1HIF05OZTtmtBtSNgquzdyMK7o6EfGrhD/view?usp=sharing)
-
-## UBC Undergraduate Research Conference 2021
-
-- [Presentation Slides](https://docs.google.com/presentation/d/1JMx8Nug02lwTFF46jchHaxJ9A-GyYxYcgL78YryCNQw/edit?usp=sharing)
-
-## Course Presentation 2022
-- [Presentation Slides](https://docs.google.com/presentation/d/1L5ypAbmXA6XnFJOx6Y6YFzBL9TlEmBrsX6uKteFZfnE/edit?usp=sharing)
-
-## Contributors 
-
-- [@parsa-rajabi](https://github.com/Parsa-Rajabi) 
-- [@brandongk](https://github.com/brandongk-ubco) 
-- [@danbugs](https://github.com/danbugs)
-- [@gurleen-kaur-30](https://github.com/gurleen-kaur-30)
-- [@sselin-co](https://github.com/sselin-co)
-
-
 ## Get Started
 
 ### Download and Print off Target Image
